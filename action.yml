@@ -1,0 +1,24 @@
+name: 'actions-drawio'
+author: 'Burnett01'
+description: 'Convert draw.io documents to jpeg|png|svg|pdf.'
+inputs:
+  quality:
+    description: 'Image quality for png|jpeg'
+    required: false
+    default: '100'
+  scale:
+    description: 'Scales the output file size for pixel-based output formats'
+    required: false
+    default: '1.0'
+  src:
+    description: 'Input file'
+    required: true
+  dest:
+    description: 'Output file'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'image'  
+  color: 'gray-dark'
