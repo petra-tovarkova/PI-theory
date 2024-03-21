@@ -17,11 +17,11 @@ jobs:
 
       - name: Download DrawIO
         run: |
-         sudo snap install drawio
+          sudo snap install drawio
 
       - name: Convert to Image
         run: |
-          drawio -x -f png -o Diagram.png moucnik_diagram.drawio
+          docker run -v ${{ github.workspace }}:/workdir fjudith/draw.io -x -f png -o /workdir/Diagram.png /workdir/moucnik_diagram.drawio
 
       - name: Commit
         env:
