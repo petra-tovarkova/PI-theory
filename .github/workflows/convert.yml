@@ -1,7 +1,7 @@
 name: Convert Drawio to Image
 
 on:
-  [push]
+  push:
   workflow_dispatch:
 
 jobs:
