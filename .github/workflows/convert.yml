@@ -21,7 +21,7 @@ jobs:
 
       - name: Convert to Image
         run: |
-          drawio -x -f png -o Diagram.png src/moucnik_diagram.drawio
+          drawio -x -f png -o Diagram.png moucnik_diagram.drawio
 
       - name: Commit
         env:
