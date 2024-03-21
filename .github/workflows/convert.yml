@@ -1,0 +1,37 @@
+name: Convert Drawio to Image
+
+on:
+  [push]
+  workflow_dispatch:
+
+jobs:
+  Convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Download DrawIO
+        run: |
+         sudo snap install drawio
+
+      - name: Convert to Image
+        run: |
+          drawio -x -f png -o Diagram.png src/moucnik_diagram.drawio
+
+      - name: Commit
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          COMMIT_MSG: |
+            Convert Image
+        run: |
+          git config user.email "actions@github"
+          git config user.name "Github Actions"
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          git add .
+          git pull origin ${GITHUB_REF}
+          git diff --quiet && git diff --staged --quiet || (git commit -m "${COMMIT_MSG}"; git push origin HEAD:${GITHUB_REF})
