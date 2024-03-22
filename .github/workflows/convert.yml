@@ -23,6 +23,7 @@ jobs:
 
       - name: Convert to Image
         run: |
+          sudo rm -rf Diagram.png
           xvfb-run drawio -x -f png -o Diagram.png moucnik_diagram.drawio
           
       - name: Commit
